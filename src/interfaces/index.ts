@@ -1,0 +1,1 @@
+export type FuncResponse<T> = T | T[] | null;

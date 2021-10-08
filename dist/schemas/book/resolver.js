@@ -36,20 +36,56 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createBook = exports.getBook = void 0;
+exports.createBook = exports.getBooks = exports.getBook = void 0;
+var model_1 = require("./model");
 var getBook = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var book;
     return __generator(this, function (_a) {
-        console.log(id);
-        return [2 /*return*/, {
-                id: 1,
-                name: "book1"
-            }];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, model_1.BookModel.findById(id)];
+            case 1:
+                book = _a.sent();
+                if (!book)
+                    return [2 /*return*/, null];
+                return [2 /*return*/, book];
+        }
     });
 }); };
 exports.getBook = getBook;
-var createBook = function (book) { return __awaiter(void 0, void 0, void 0, function () {
+var getBooks = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var books, err_1;
     return __generator(this, function (_a) {
-        return [2 /*return*/, book];
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, model_1.BookModel.find()];
+            case 1:
+                books = _a.sent();
+                return [2 /*return*/, books];
+            case 2:
+                err_1 = _a.sent();
+                return [2 /*return*/, null];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getBooks = getBooks;
+var createBook = function (input) { return __awaiter(void 0, void 0, void 0, function () {
+    var book, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                book = new model_1.BookModel(input);
+                return [4 /*yield*/, book.save()];
+            case 1:
+                _a.sent();
+                return [2 /*return*/, book];
+            case 2:
+                err_2 = _a.sent();
+                return [2 /*return*/, null];
+            case 3: return [2 /*return*/];
+        }
     });
 }); };
 exports.createBook = createBook;

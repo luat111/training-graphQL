@@ -42,10 +42,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fastify_1 = __importDefault(require("fastify"));
 var fastify_express_1 = __importDefault(require("fastify-express"));
 var express_graphql_1 = require("express-graphql");
+var database_1 = require("./database");
 var cors_1 = __importDefault(require("cors"));
+require("dotenv/config");
 var schemas_1 = __importDefault(require("./schemas"));
 var mount = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var app;
+    var app, db;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -55,6 +57,8 @@ var mount = function () { return __awaiter(void 0, void 0, void 0, function () {
                 _a.sent();
                 // Middleware
                 app.use((0, cors_1.default)());
+                db = new database_1.DB(process.env.MONGO_URL || '');
+                db.connectDb();
                 // Default Route
                 app.get('/', function (_, response) {
                     response.send({ hello: 'world' });

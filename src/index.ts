@@ -1,7 +1,9 @@
 import Fastify from 'fastify'
 import fastifyExpress from 'fastify-express';
 import { graphqlHTTP } from 'express-graphql';
+import { DB } from './database';
 import cors from 'cors';
+import 'dotenv/config';
 
 import schema from './schemas';
 
@@ -14,6 +16,10 @@ const mount = async () => {
 
   // Middleware
   app.use(cors());
+
+  // Connect MongoDb Atlas  
+  const db = new DB(process.env.MONGO_URL || '');
+  db.connectDb();
 
 
   // Default Route

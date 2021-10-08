@@ -1,7 +1,7 @@
-import { GraphQLFieldConfig, GraphQLID, GraphQLNonNull, GraphQLObjectType } from "graphql";
+import { GraphQLFieldConfig, GraphQLID, GraphQLList, GraphQLNonNull, GraphQLObjectType } from "graphql";
 
 import { BookType } from "./type";
-import { getBook } from "./resolver";
+import { getBook, getBooks } from "./resolver";
 
 const GetBook: GraphQLFieldConfig<unknown, unknown> = {
     type: BookType,
@@ -16,9 +16,17 @@ const GetBook: GraphQLFieldConfig<unknown, unknown> = {
     },
 }
 
+const GetBooks: GraphQLFieldConfig<unknown, unknown> = {
+    type: new GraphQLList(BookType),   
+    resolve: () => {        
+        return getBooks()
+    },
+}
+
 export const BookQuery = new GraphQLObjectType({
     name: 'BookQuery',
     fields: {
-        getBook: GetBook
+        getBook: GetBook,
+        getBooks:GetBooks
     }
 })

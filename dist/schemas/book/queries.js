@@ -16,9 +16,16 @@ var GetBook = {
         return (0, resolver_1.getBook)(id);
     },
 };
+var GetBooks = {
+    type: new graphql_1.GraphQLList(type_1.BookType),
+    resolve: function () {
+        return (0, resolver_1.getBooks)();
+    },
+};
 exports.BookQuery = new graphql_1.GraphQLObjectType({
     name: 'BookQuery',
     fields: {
-        getBook: GetBook
+        getBook: GetBook,
+        getBooks: GetBooks
     }
 });

@@ -1,7 +1,15 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 
-const BookSchema = new Schema({
-    name: { type: String },
+interface BookDoc extends Document {
+    id: string,
+    name: string
+}
+
+const BookSchema: Schema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
 })
 
-module.exports = model('Book', BookSchema);
+export const BookModel: Model<BookDoc> = model('Book', BookSchema);
