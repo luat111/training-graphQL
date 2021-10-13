@@ -1,18 +1,17 @@
-import { GraphQLFieldConfig, GraphQLObjectType } from "graphql";
+import { GraphQLFieldConfig, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 
-import { BookInput, BookType } from "./type";
+import { Book, BookType } from "./type";
 import { createBook } from "./resolver";
 
-const CreateBook: GraphQLFieldConfig<unknown, unknown> = {
+const CreateBook: GraphQLFieldConfig<Book, unknown> = {
     type: BookType,
     args: {
-        body: {
-            type: BookInput,
-        }
+        name: { type: new GraphQLNonNull(GraphQLString), },
+        authorId: { type: new GraphQLNonNull(GraphQLString), },
     },
     resolve: (_, args) => {
-        const { body } = args;
-        const book = createBook(body);
+        const { name, authorId } = args;
+        const book = createBook(name, authorId);
 
         return book;
     },

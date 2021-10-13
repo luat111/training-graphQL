@@ -2,7 +2,8 @@ import { Schema, model, Model } from "mongoose";
 
 interface BookDoc extends Document {
     id: string,
-    name: string
+    name: string,
+    authorId: string
 }
 
 const BookSchema: Schema = new Schema({
@@ -10,6 +11,10 @@ const BookSchema: Schema = new Schema({
         type: String,
         required: true
     },
+    authorId: {
+        type: String,
+        required: true
+    }
 })
 
 export const BookModel: Model<BookDoc> = model('Book', BookSchema);

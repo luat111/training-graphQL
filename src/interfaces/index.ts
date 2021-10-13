@@ -1,1 +1,1 @@
-export type FuncResponse<T> = T | T[] | null;
+export type FuncResponse<T> = T | T[] | unknown;

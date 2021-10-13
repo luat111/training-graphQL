@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from "graphql"
 
 import Book from "./book";
+import Author from './author';
 
 const Query = new GraphQLObjectType({
     name: 'Query',
@@ -9,6 +10,10 @@ const Query = new GraphQLObjectType({
             type: Book.BookQuery,
             resolve: () => { return {} }
         },
+        author: {
+            type: Author.AuthorQuery,
+            resolve: () => { return {} }
+        }
     }
 })
 
@@ -17,6 +22,10 @@ const Mutation = new GraphQLObjectType({
     fields: {
         book: {
             type: Book.BookMutation,
+            resolve: () => { return {} }
+        },
+        author: {
+            type: Author.AuthorMutation,
             resolve: () => { return {} }
         }
     }
